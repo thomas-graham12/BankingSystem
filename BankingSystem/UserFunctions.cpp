@@ -29,7 +29,7 @@ void UserFunctions::DisplayMoney(const std::string& username)
 	txt.close();
 }
 
-void UserFunctions::DepositToSavings()
+void UserFunctions::DepositToSavings(const std::string& username)
 {
 	std::cout << "How much would you like to deposit: ";
 	std::cin >> amountToTransfer;
@@ -52,9 +52,25 @@ void UserFunctions::DepositToSavings()
 	{
 		std::cout << "Not a valid amount.\n";
 	}
+
+	// WRITING TO FILE
+	std::string fileName = username + ".txt";
+	std::ofstream outfile;
+	// Open a file in write mode
+	outfile.open("C:/Users/User/source/repos/2024/NormalPeopleProjects/BankingSystem/BankingSystem/BankUsers/" + fileName);
+
+	if (outfile.is_open())
+	{
+		outfile << firstName << " " << lastName << " " << savingsAccWorth << " " << debitCardWorth;
+		outfile.close();
+	}
+	else
+	{
+		std::cerr << "Unable to open file\n\n";
+	}
 }
 
-void UserFunctions::WithdrawToCard()
+void UserFunctions::WithdrawToCard(const std::string& username)
 {
 	std::cout << "How much would you like to withdraw: ";
 	std::cin >> amountToTransfer;
@@ -76,6 +92,22 @@ void UserFunctions::WithdrawToCard()
 	else
 	{
 		std::cout << "Not a valid amount.\n";
+	}
+
+	// WRITING TO FILE
+	std::string fileName = username + ".txt";
+	std::ofstream outfile;
+	// Open a file in write mode
+	outfile.open("C:/Users/User/source/repos/2024/NormalPeopleProjects/BankingSystem/BankingSystem/BankUsers/" + fileName);
+
+	if (outfile.is_open())
+	{
+		outfile << firstName << " " << lastName << " " << savingsAccWorth << " " << debitCardWorth;
+		outfile.close();
+	}
+	else
+	{
+		std::cerr << "Unable to open file\n\n";
 	}
 }
 

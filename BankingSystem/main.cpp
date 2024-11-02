@@ -74,10 +74,10 @@ int main()
 				switch (choice)
 				{
 				case 1:
-					userFunctions.DepositToSavings();
+					userFunctions.DepositToSavings(userList.GetUser());
 					break;
 				case 2:
-					userFunctions.WithdrawToCard();
+					userFunctions.WithdrawToCard(userList.GetUser());
 					break;
 				case 3:
 					userFunctions.Logout(bHasAccess);

@@ -17,7 +17,7 @@ private:
 public:
 	UserFunctions();
 	void DisplayMoney(const std::string& username);
-	void DepositToSavings();
-	void WithdrawToCard();
+	void DepositToSavings(const std::string& username);
+	void WithdrawToCard(const std::string& username);
 	void Logout(bool &bHasAccess);
 };
