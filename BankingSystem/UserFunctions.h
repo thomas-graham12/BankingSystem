@@ -19,5 +19,5 @@ public:
 	void DisplayMoney(const std::string& username);
 	void DepositToSavings();
 	void WithdrawToCard();
-	void Logout();
+	void Logout(bool &bHasAccess);
 };

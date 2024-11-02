@@ -7,7 +7,6 @@
 /*
 	TODO:
 	Work on functionality for when logged in.
-	Work on updating password in userdata.txt when user changes password.
 	Look at refactoring UserFunctions Withdraw and Deposit functions.
 	Start commenting some important lines.
 
@@ -81,6 +80,7 @@ int main()
 					userFunctions.WithdrawToCard();
 					break;
 				case 3:
+					userFunctions.Logout(bHasAccess);
 					break;
 				default:
 					break;

@@ -9,17 +9,31 @@ void UserList::CreateAccount()
 {
 	std::cout << "Enter a username: ";
 	std::cin >> user;
-
 	std::cout << "Enter a password: ";
 	std::cin >> pass;
+	
+	std::cout << "Please enter your first name: ";
+	std::cin >> firstName;
+	std::cout << "Please enter your last name: ";
+	std::cin >> lastName;
 
-	std::cout << "Successfully created account\n";
+	std::cout << "How much is in your savings account: ";
+	std::cin >> savingsAmount;
+	std::cout << "How much is in your debit card: ";
+	std::cin >> debitAmount;
+
 	listOfUserInfo[user] = pass;
 
 	std::ofstream file;
 	std::string fileName = "C:/Users/User/source/repos/2024/NormalPeopleProjects/BankingSystem/BankingSystem/BankUsers/" + user + ".txt";
 	file.open(fileName);
-	file.close();
+	if (file.is_open())
+	{
+		file << firstName << " " << lastName << " " << savingsAmount << " " << debitAmount;
+		file.close();
+		std::cout << "Successfully created account\n";
+	}
+
 	WriteUserToFile();
 	ReadUserFromFile();
 }
@@ -54,6 +68,12 @@ void UserList::ForgotPassword()
 		std::cout << "Please enter a new password: ";
 		std::cin >> pass;
 		listOfUserInfo[user] = pass;
+		WriteUserToFile();
+		ReadUserFromFile();
+	}
+	else
+	{
+		std::cout << "Can't find user\n";
 	}
 }
 

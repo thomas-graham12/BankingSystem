@@ -11,6 +11,11 @@ private:
 	std::unordered_map<std::string, std::string> listOfUserInfo;
 	std::string user;
 	std::string pass;
+	std::string firstName;
+	std::string lastName;
+
+	float savingsAmount;
+	float debitAmount;
 
 public:
 	UserList();

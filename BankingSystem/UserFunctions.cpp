@@ -10,15 +10,23 @@ UserFunctions::UserFunctions()
 void UserFunctions::DisplayMoney(const std::string& username)
 {
 	std::string fileName = username + ".txt";
-	std::ifstream txt("C:/Users/User/source/repos/2024/NormalPeopleProjects/BankingSystem/BankingSystem/BankUsers/");
+	std::ifstream txt;
+	
+	txt.open("C:/Users/User/source/repos/2024/NormalPeopleProjects/BankingSystem/BankingSystem/BankUsers/" + fileName);
 
-	while (txt >> firstName >> lastName >> savingsAccWorth >> debitCardWorth)
+	if (!txt.is_open())
 	{
-		fullName = firstName + " " + lastName;
-		std::cout << fullName << '\n';
-		std::cout << "Savings: $" << savingsAccWorth << '\n';
-		std::cout << "Debit Card: $" << debitCardWorth << '\n';
+		std::cerr << "Error: Could not open " << fileName << '\n';
 	}
+
+	txt >> firstName >> lastName >> savingsAccWorth >> debitCardWorth;
+
+	fullName = firstName + " " + lastName;
+	std::cout << "Name: " << fullName << '\n';
+	std::cout << "Savings: $" << savingsAccWorth << '\n';
+	std::cout << "Debit Card: $" << debitCardWorth << '\n';
+
+	txt.close();
 }
 
 void UserFunctions::DepositToSavings()
@@ -71,7 +79,8 @@ void UserFunctions::WithdrawToCard()
 	}
 }
 
-void UserFunctions::Logout()
+void UserFunctions::Logout(bool& bHasAccess)
 {
-	// TODO!
+	std::cout << "Now logging you out...\n\n";
+	bHasAccess = false;
 }
