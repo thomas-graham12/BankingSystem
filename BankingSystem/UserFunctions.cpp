@@ -7,7 +7,7 @@ UserFunctions::UserFunctions()
 	amountToTransfer = 0;
 }
 
-void UserFunctions::DisplayMoney(const std::string& username)
+void UserFunctions::DisplayUserInfo(const std::string& username)
 {
 	std::string fileName = username + ".txt";
 	std::ifstream txt;
@@ -24,7 +24,7 @@ void UserFunctions::DisplayMoney(const std::string& username)
 	fullName = firstName + " " + lastName;
 	std::cout << "Name: " << fullName << '\n';
 	std::cout << "Savings: $" << savingsAccWorth << '\n';
-	std::cout << "Debit Card: $" << debitCardWorth << '\n';
+	std::cout << "Debit Card: $" << debitCardWorth << "\n\n\n";
 
 	txt.close();
 }
@@ -34,40 +34,10 @@ void UserFunctions::DepositToSavings(const std::string& username)
 	std::cout << "How much would you like to deposit: ";
 	std::cin >> amountToTransfer;
 
-	if (amountToTransfer < debitCardWorth && amountToTransfer > 0)
-	{
-		debitCardWorth -= amountToTransfer;
-		savingsAccWorth += amountToTransfer;
-		std::cout << "$" << amountToTransfer << " has been transferred to your savings account.\n";
-	}
-	else if (amountToTransfer > debitCardWorth)
-	{
-		std::cout << "Not enough money in to transfer.\n";
-	}
-	else if (amountToTransfer < debitCardWorth)
-	{
-		std::cout << "Money to transfer must be more than you have.\n";
-	}
-	else
-	{
-		std::cout << "Not a valid amount.\n";
-	}
+	TransferMoney(debitCardWorth, savingsAccWorth);
 
-	// WRITING TO FILE
-	std::string fileName = username + ".txt";
-	std::ofstream outfile;
-	// Open a file in write mode
-	outfile.open("C:/Users/User/source/repos/2024/NormalPeopleProjects/BankingSystem/BankingSystem/BankUsers/" + fileName);
+	UpdateMoney(username);
 
-	if (outfile.is_open())
-	{
-		outfile << firstName << " " << lastName << " " << savingsAccWorth << " " << debitCardWorth;
-		outfile.close();
-	}
-	else
-	{
-		std::cerr << "Unable to open file\n\n";
-	}
 }
 
 void UserFunctions::WithdrawToCard(const std::string& username)
@@ -75,25 +45,41 @@ void UserFunctions::WithdrawToCard(const std::string& username)
 	std::cout << "How much would you like to withdraw: ";
 	std::cin >> amountToTransfer;
 
-	if (amountToTransfer < savingsAccWorth && amountToTransfer > 0)
+	TransferMoney(savingsAccWorth, debitCardWorth);
+
+	UpdateMoney(username);
+}
+
+void UserFunctions::Logout(bool& bHasAccess)
+{
+	std::cout << "Now logging you out...\n\n\n\n\n\n";
+	bHasAccess = false;
+}
+
+void UserFunctions::TransferMoney(float& takenFromAccount, float& givenToAccount)
+{
+	if (amountToTransfer < takenFromAccount && amountToTransfer > 0)
 	{
-		savingsAccWorth -= amountToTransfer;
-		debitCardWorth += amountToTransfer;
-		std::cout << "$" << amountToTransfer << " has been transferred to your debit card.\n";
+		takenFromAccount -= amountToTransfer;
+		givenToAccount += amountToTransfer;
+		std::cout << "$" << amountToTransfer << " has been transferred\n\n\n\n\n\n";
 	}
-	else if (amountToTransfer > savingsAccWorth)
+	else if (amountToTransfer > takenFromAccount)
 	{
-		std::cout << "Not enough money to transfer.\n";
+		std::cout << "Not enough money to transfer.\n\n\n\n\n\n";
 	}
-	else if (amountToTransfer < savingsAccWorth)
+	else if (amountToTransfer < takenFromAccount)
 	{
-		std::cout << "Money to transfer must be more than you have.\n";
+		std::cout << "Money to transfer must be more than you have.\n\n\n\n\n\n";
 	}
 	else
 	{
-		std::cout << "Not a valid amount.\n";
+		std::cout << "Not a valid amount.\n\n\n\n\n\n";
 	}
+}
 
+void UserFunctions::UpdateMoney(const std::string& username)
+{
 	// WRITING TO FILE
 	std::string fileName = username + ".txt";
 	std::ofstream outfile;
@@ -107,12 +93,6 @@ void UserFunctions::WithdrawToCard(const std::string& username)
 	}
 	else
 	{
-		std::cerr << "Unable to open file\n\n";
+		std::cerr << "Unable to open file\n\n\n\n\n\n";
 	}
-}
-
-void UserFunctions::Logout(bool& bHasAccess)
-{
-	std::cout << "Now logging you out...\n\n";
-	bHasAccess = false;
 }

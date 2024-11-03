@@ -2,7 +2,8 @@
 
 UserList::UserList()
 {
-	
+	savingsAmount = 0;
+	debitAmount = 0;
 }
 
 void UserList::CreateAccount()
@@ -31,7 +32,7 @@ void UserList::CreateAccount()
 	{
 		file << firstName << " " << lastName << " " << savingsAmount << " " << debitAmount;
 		file.close();
-		std::cout << "Successfully created account\n";
+		std::cout << "Successfully created account\n\n\n\n\n\n";
 	}
 
 	WriteUserToFile();
@@ -49,12 +50,12 @@ bool UserList::AccountLogin(bool& bHasAccess)
 	// Scans map for the user (stops when found it.) and checks to see if pass is right
 	if (listOfUserInfo.find(user) != listOfUserInfo.end() && listOfUserInfo[user] == pass)
 	{
-		std::cout << "Logged in successfully\n";
+		std::cout << "Logged in successfully\n\n\n\n\n\n";
 		return bHasAccess = true;
 	}
 	else
 	{
-		std::cout << "Wrong username or password\n";
+		std::cout << "Wrong username or password\n\n\n\n\n\n";
 		return bHasAccess = false;
 	}
 }
@@ -70,10 +71,11 @@ void UserList::ForgotPassword()
 		listOfUserInfo[user] = pass;
 		WriteUserToFile();
 		ReadUserFromFile();
+		std::cout << "Password changed successfully\n\n\n\n\n\n";
 	}
 	else
 	{
-		std::cout << "Can't find user\n";
+		std::cout << "Can't find user\n\n\n\n\n\n";
 	}
 }
 
@@ -81,7 +83,7 @@ void UserList::GetUserList()
 {
 	for (auto i = listOfUserInfo.begin(); i != listOfUserInfo.end(); i++)
 	{
-		std::cout << i->first << " : " << i->second << '\n';
+		std::cout << i->first << " : " << i->second << "\n\n\n\n\n\n";
 	}
 }
 
@@ -98,11 +100,10 @@ void UserList::WriteUserToFile()
 			outfile << pair.first << " " << pair.second << '\n';
 		}
 		outfile.close();
-		std::cout << "Data written to file\n\n";
 	}
 	else
 	{
-		std::cerr << "Unable to open file\n\n";
+		std::cerr << "Unable to write to file\n\n\n\n\n\n";
 	}
 }
 
@@ -130,10 +131,9 @@ void UserList::ReadUserFromFile()
 		}
 		// Close to prevent memory leaks
 		infile.close();
-		std::cout << "Data loaded successfully.\n\n";
 	}
 	else
 	{
-		std::cerr << "Unable to open file.\n";
+		std::cerr << "Unable to read file.\n";
 	}
 }

@@ -6,8 +6,6 @@
 //////////////////
 /*
 	TODO:
-	Work on functionality for when logged in.
-	Look at refactoring UserFunctions Withdraw and Deposit functions.
 	Start commenting some important lines.
 
 
@@ -20,7 +18,7 @@ int main()
 	bool bHasAccess = false;
 	UserList userList;
 	UserFunctions userFunctions;
-	bool bIsOpen = false;
+	bool bIsOpen = true;
 	int choice = 0;
 
 	std::cout << "*****************************\n" <<
@@ -31,7 +29,7 @@ int main()
 		"*                           *\n" <<
 		"*****************************\n\n";
 	userList.ReadUserFromFile();
-	while (!bIsOpen)
+	while (bIsOpen)
 	{
 
 		std::cout << "1. Create an account\n2. Login to an account\n3. Forgot password\n4. Exit\n";
@@ -56,6 +54,7 @@ int main()
 			userList.GetUserList();
 			break;
 		default:
+			std::cout << "This is not a valid option.\n";
 			break;
 		}
 
@@ -66,8 +65,7 @@ int main()
 
 			while (choice != 3)
 			{
-
-				userFunctions.DisplayMoney(userList.GetUser());
+				userFunctions.DisplayUserInfo(userList.GetUser());
 
 				std::cout << "\n\nWhat would you like to do?\n1. Depost Money\n2. Withdraw Money\n3. Logout\n";
 				std::cin >> choice;
@@ -83,6 +81,7 @@ int main()
 					userFunctions.Logout(bHasAccess);
 					break;
 				default:
+					std::cout << "This is not a valid option.\n";
 					break;
 				}
 			}
@@ -92,6 +91,8 @@ int main()
 			continue;
 		}
 	}
+
+	std::cout << "Thanks for using our banking system!\n";
 
 	return 0;
 }
