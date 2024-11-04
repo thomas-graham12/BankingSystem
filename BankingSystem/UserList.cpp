@@ -118,7 +118,7 @@ void UserList::ReadUserFromFile()
 		while (std::getline(infile, line))
 		{
 			// Create istringstream to parse the lines
-			std::istringstream iss(line); 
+			std::istringstream iss(line);
 			std::string username;
 			std::string password;
 
